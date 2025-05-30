@@ -6,6 +6,8 @@ package view;
 import Controller.Fpasswordcontroller;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import utils.EmailSender;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -26,7 +28,7 @@ public class FPassword extends javax.swing.JFrame {
  emailerrorLabel.setForeground(Color.RED);
  emailerrorLabel.setText(""); // Empty at first
 
-        emailaddress.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        email.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
     public void insertUpdate(javax.swing.event.DocumentEvent e) {
         validateEmail();
     }
@@ -41,14 +43,14 @@ public class FPassword extends javax.swing.JFrame {
      
     //for validate email
     private void validateEmail() {
-    String input = emailaddress.getText().trim();
+    String input = email.getText().trim();
     boolean isValid = input.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
 
     if (!isValid) {
-        emailaddress.setForeground(Color.RED);
+        email.setForeground(Color.RED);
          emailerrorLabel.setText("Invalid email format");
     } else {
-        emailaddress.setForeground(Color.BLACK);
+        email.setForeground(Color.BLACK);
          emailerrorLabel.setText("");
     }
 }
@@ -65,7 +67,7 @@ public class FPassword extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        emailaddress = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         GET_OTP = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -84,19 +86,19 @@ public class FPassword extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(29, 61, 130));
         jLabel3.setText("No worries, we are here !");
 
-        emailaddress.setBackground(new java.awt.Color(252, 251, 244));
-        emailaddress.setText("Enter your Email address");
-        emailaddress.addFocusListener(new java.awt.event.FocusAdapter() {
+        email.setBackground(new java.awt.Color(252, 251, 244));
+        email.setText("Enter your Email address");
+        email.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                emailaddressFocusGained(evt);
+                emailFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                emailaddressFocusLost(evt);
+                emailFocusLost(evt);
             }
         });
-        emailaddress.addActionListener(new java.awt.event.ActionListener() {
+        email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailaddressActionPerformed(evt);
+                emailActionPerformed(evt);
             }
         });
 
@@ -129,7 +131,7 @@ public class FPassword extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(emailaddress, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                            .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                             .addComponent(GET_OTP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(126, 126, 126)
@@ -146,7 +148,7 @@ public class FPassword extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(23, 23, 23)
-                .addComponent(emailaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(GET_OTP, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -190,32 +192,45 @@ public class FPassword extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void emailaddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailaddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailaddressActionPerformed
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
 
-    private void emailaddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailaddressFocusGained
-if (emailaddress.getText().trim().equals("Enter your Email address")) {
-        emailaddress.setText("");
-        emailaddress.setForeground(Color.BLACK);
+    }//GEN-LAST:event_emailActionPerformed
+
+    private void emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusGained
+if (email.getText().trim().equals("Enter your Email address")) {
+        email.setText("");
+        email.setForeground(Color.BLACK);
        }         // TODO add your handling code here:
         
-    }//GEN-LAST:event_emailaddressFocusGained
+    }//GEN-LAST:event_emailFocusGained
 
-    private void emailaddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailaddressFocusLost
-if (emailaddress.getText().trim().equals("")) {
-        emailaddress.setText("Enter your Email address");
-        emailaddress.setForeground(Color.GRAY);
+    private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
+if (email.getText().trim().equals("")) {
+        email.setText("Enter your Email address");
+        email.setForeground(Color.GRAY);
     }         // TODO add your handling code here:
       
-    }//GEN-LAST:event_emailaddressFocusLost
+    }//GEN-LAST:event_emailFocusLost
 
     private void GET_OTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GET_OTPActionPerformed
-    String email = emailaddress.getText().trim();
+    String email_address = email.getText().trim();
 
     Fpasswordcontroller controller = new Fpasswordcontroller();
-    String result = controller.register(email);
-    JOptionPane.showMessageDialog(this, result);        // TODO add your handling code here:
+    String result = controller.register(email_address);
+    JOptionPane.showMessageDialog(this, result);  
+    
+    if (result == null) {
+        String temp_result = EmailSender.Emailsend(email_address);
+        JOptionPane.showMessageDialog(this, temp_result);
+    
+    // Create an instance of the other JFrame window
+    OTPs otpWindow = new OTPs();
+
+    // Show the other window
+    otpWindow.setVisible(true);
+
+    // Optionally, close the current window
+    this.dispose();}// TODO add your handling code here:
     }//GEN-LAST:event_GET_OTPActionPerformed
 
     /**
@@ -258,7 +273,7 @@ if (emailaddress.getText().trim().equals("")) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GET_OTP;
-    private javax.swing.JTextField emailaddress;
+    private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -267,4 +282,10 @@ if (emailaddress.getText().trim().equals("")) {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
+//    public AddUserListener(ActionListener listener){
+//        GET_OTP.addActionListener(listener);
+//    }
 }
+
+
