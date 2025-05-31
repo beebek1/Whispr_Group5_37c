@@ -116,9 +116,14 @@ public class FPassword extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(29, 61, 130));
         jLabel4.setText("Able to reacall ?");
 
-        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(29, 61, 130));
-        jLabel5.setText("Sign In");
+        jLabel5.setText("<html><u>Sign in</html></u>");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,7 +142,7 @@ public class FPassword extends javax.swing.JFrame {
                         .addGap(126, 126, 126)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -154,8 +159,8 @@ public class FPassword extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addContainerGap(202, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/fpass_1.png"))); // NOI18N
@@ -214,24 +219,40 @@ if (email.getText().trim().equals("")) {
 
     private void GET_OTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GET_OTPActionPerformed
     String email_address = email.getText().trim();
+    String purpose = "forgotpassword";
+    Boolean isverified = false;
 
     Fpasswordcontroller controller = new Fpasswordcontroller();
     String result = controller.register(email_address);
-    JOptionPane.showMessageDialog(this, result);  
     
     if (result == null) {
-        String temp_result = EmailSender.Emailsend(email_address);
+        String temp_result = EmailSender.Emailsend(email_address, purpose, isverified);
         JOptionPane.showMessageDialog(this, temp_result);
     
     // Create an instance of the other JFrame window
-    OTPs otpWindow = new OTPs();
+    OTPs otpWindow = new OTPs("forgetpassword");
 
     // Show the other window
     otpWindow.setVisible(true);
 
     // Optionally, close the current window
     this.dispose();}// TODO add your handling code here:
+    else{
+    JOptionPane.showMessageDialog(this, result);
+    
+    }
     }//GEN-LAST:event_GET_OTPActionPerformed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    Signin signinwindow = new Signin();
+
+    // Show the other window
+    signinwindow.setVisible(true);
+
+    // Optionally, close the current window
+    this.dispose();    // TODO add your handling code here:
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
